@@ -4,8 +4,10 @@ Used to import points from specific buildings to the database without re-importi
 1. Download point-analysis folder from github (you can clone if you want, but make sure everything is working before pushing) and put it in your home directory on the server (must be on the server to push info to the database) - you will be working in here
 
 2. Find the json file that matches the building you would like to add to the database and remember/write down the name for later
-    b. It will be in point-analysis/point-importer/json
-    c. If it is not there, there are probably no siemens points matching your building
+
+    a. It will be in point-analysis/point-importer/json
+
+    b. If it is not there, there are probably no siemens points matching your building
     Note: the json files in energy-analytics-comps/data/csv_descriptions on the github are incomplete
     If you want to make a new .json file, see “How to make a new point json file” below
 
