@@ -20,6 +20,10 @@ Used to import points from specific buildings to the database without re-importi
 
         1. You can find information on what point abbreviations/encodings mean in these decoders
 
+        2. **Make sure** you check that the names in the database *tags* table to ensure that you are tagging the points with the correct wording
+
+            1. Example: use "Setpoint" instead of "Set Point"
+
     2. More info on point syntax can be found in energy-analytics-comps/data/csv_descriptions on the github:
 
         1. ‘PointDecoder.json’ OR ‘What the points are.txt’
@@ -28,10 +32,10 @@ Used to import points from specific buildings to the database without re-importi
 
 4. Navigate to /point-importer/siemens_master.py
 
-    1. In the get_points() method, change ‘with open('/json/points.json’)' (or whatever is in that spot) to:
+    1. In the get_points() method, change ‘with open('/json/points.json’)' (or whatever is in that spot) to (from step 2):
             
         ```python
-        'with open(‘/json/<yourJSONFileName>’)' (from step 2)
+        with open(‘/json/<yourJSONFileName>’)
         ```
 
     2. To the imports at the top, add:
@@ -87,21 +91,27 @@ Used to import points from specific buildings to the database without re-importi
 
     2. To do this, you can usually run a DELETE sql query on all points with point_id’s greater than a certain number, since new points will usually have the highest point_id’s
 
-## How to Create a New Coint json File:
-1. All points are found in /point-importer/json/points.json or pick a building’s already created json file (testPointJson_<buildingName>.json) from the /point-importer/json folder
+## How to Create a New Point json File:
+1. All points are found in /point-importer/json/points.json
 
 2. Extracting points from points.json can be done by running a script that looks for all keys that have that building’s code (EV for Evans, HU for Hulings, etc.) at the beginning of the point name
     
-    1. NOTE: There can be multiple prefixes/codes for buildings and some are not delimited by commas, dashes, spaces, etc.
+    1. **Note:** There can be multiple prefixes/codes for buildings and some are not delimited by commas, dashes, spaces, etc.
     
-    2. See /point-importer/findPoints.py for an example script on how to extract the points you would like to import
+    2. See /point-importer/getPoints.py for an example script on how to extract the points you would like to import (this script puts the points into a json file)
 
     3. Look in energy-analytics-comps/data/csv-descriptions/PointDecoder.json for more info on how buildings are encoded
 
-3. Edit the getPointNames.py to match which points you would like to find
+3. Edit the findPointNames.py if statements to match which points you would like to find
 
     1. There are some guidelines in that file’s comments on how to do it
 
-4. Put your if statement that finds all (and only) the correct points in getPoints.py and change the .json name of the output file to match what your should be named
+    2. Test out which points your logic gets before you put anything into getPoints.py (it doesn't really matter but it's easier)
 
-5. Run getPoints.py (you can run it again if you mess up and nothing bad will happen - just remember to delete your only .json file if you change the name)
+4. Put your if statement(s) that find all (and only) the correct points that are in your building into getPoints.py
+
+5. **Important:** change the .json name of the output file to match what your fild should be named - **if you do not do this an old json file might be overwritten**
+
+6. Run getPoints.py (you can run it again if you mess up and nothing bad will happen - just remember to delete your messed up .json file if you change the name)
+
+7. You now have a json file to use to import points!
