@@ -30,21 +30,28 @@ Used to import points from specific buildings to the database without re-importi
 
     1. In the get_points() method, change ‘with open('/json/points.json’)' (or whatever is in that spot) to:
             
-            ```python
-            'with open(‘/json/<yourJSONFileName>’)' (from step 2)
-            ```
+        ```python
+        'with open(‘/json/<yourJSONFileName>’)' (from step 2)
+        ```
 
     2. To the imports at the top, add:
 
-        1. “from decoders.<your decoder file name without ‘.py’> import <your point decoder class>
+        ```python
+        from decoders.<your decoder file name without ‘.py’> import <your point decoder class>
+        ```
 
-        2. Ex: “from decoders.hulings_point_decoder import HulingsPointDecoder”
+        Example: 
+        ```python
+        “from decoders.hulings_point_decoder import HulingsPointDecoder”
+        ```
 
-        3. If you are using a smart text editor/virtual environment (like VS Code, Atom, etc.), it might alert you that there are errors by putting “decoders.” at the beginning, but when your run the code it has to be there and will not throw errors
+        NOTE: If you are using a smart text editor/virtual environment (like VS Code, Atom, etc.), it might alert you that there are errors by putting “decoders.” at the beginning, but when your run the code it has to be there and will not throw errors
 
     3. In get_point_object() set
     
-            building_decoder_class = <your point deoder class>
+        ```python
+        building_decoder_class = <your point decoder class>
+        ```
 
 5. What you should have in your /point-analysis/point_importer folder by now:
 
