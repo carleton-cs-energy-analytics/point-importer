@@ -30,7 +30,9 @@ Used to import points from specific buildings to the database without re-importi
 
     1. In the get_points() method, change ‘with open('/json/points.json’)' (or whatever is in that spot) to:
             
-        'with open(‘/json/<yourJSONFileName>’)' (from step 2)
+            ```python
+            'with open(‘/json/<yourJSONFileName>’)' (from step 2)
+            ```
 
     2. To the imports at the top, add:
 
@@ -42,7 +44,7 @@ Used to import points from specific buildings to the database without re-importi
 
     3. In get_point_object() set
     
-        building_decoder_class = <your point deoder class>
+            building_decoder_class = <your point deoder class>
 
 5. What you should have in your /point-analysis/point_importer folder by now:
 
