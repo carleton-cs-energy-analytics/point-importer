@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
     siemens_master.py
     Ethan Cassel-Mace and Chris Tordi, 4 November 2018
@@ -21,15 +20,6 @@ from decoders.weitz_point_decoder import WeitzPointDecoder
 
 from decoders.override_point_decoder import OverridePointDecoder
 
-OVERRIDE_POINTNAME_SET = {}
-#                       {'STHS.HWRT',
-#                          'STHS.HWST',
-#                          'SEV.HX1.HW',
-#                          'MCHWRT',
-#                          'EV.HX2.HWR',
-#                          'SHHWRT',
-#                          'SHHWST'}
-
 
 def get_point_object(name, point_attributes):
     '''
@@ -44,14 +34,12 @@ def get_point_object(name, point_attributes):
 
 def get_points():
     """
-    :return: List of all the decoded points. This is where to change which points are allowed to be
-    imported, and which aren't.
+    :return: List of all the decoded points. Put your json file for the building you would like to upload after "open("
     """
     with open('json/testPointJson_Cassat.json') as f:
         points = json.loads(f.read())  # read point dictionary from points.json
 
     points_list = [get_point_object(name, point) for name, point in points.items()]  # list of point objects
-    # @TODO Only decodes points with building name decoded or in override set. Change if this isn't wanted!
-    decoded_points_list = [point for point in points_list if
-                           point.building_name or point.point_name in OVERRIDE_POINTNAME_SET]
+    
+    decoded_points_list = [point for point in points_list if point.building_name]
     return decoded_points_list

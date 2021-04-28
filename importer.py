@@ -103,7 +103,6 @@ def import_point(points):
             "ENABLE_DISABL": "DISABL_ENABLE",
             "DISABL_ENABL": "DISABL_ENABLE"
         }
-        #print(point.value_type)
         if point.value_type in reordering_map.keys():
             point.value_type = reordering_map[point.value_type]
         value_type_id = get_id_of("value_types", point.value_type)
